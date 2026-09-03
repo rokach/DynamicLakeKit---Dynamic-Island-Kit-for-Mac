@@ -1,5 +1,11 @@
 # DynamicLakeKit
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Images/DynamicLakeKit-Cover_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="Images/DynamicLakeKit-Cover.png">
+  <img alt="DynamicLakeKit" src="Images/DynamicLakeKit-Cover.png">
+</picture>
+
 DynamicLakeKit is the binary SDK package for building DynamicLake integrations on macOS.
 
 Use it to build SwiftUI ExtensionKit extensions that render DynamicLake live activities, sneak peeks, extra live activities, and settings scenes. JSON plugins do not need DynamicLakeKit unless a Swift plugin executable wants to reuse the optional JSON message types.
