@@ -1,0 +1,6 @@
+framework module DynamicLakeKit {
+  umbrella header "DynamicLakeKit.h"
+  export *
+
+  module * { export * }
+}

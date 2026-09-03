@@ -1,0 +1,14 @@
+DynamicLakePro.xcodeproj/project.xcworkspace/xcuserdata
+DynamicLakePro.xcodeproj/xcuserdata/hananrokach.xcuserdatad/
+DynamicLake Pro.xcodeproj/project.xcworkspace/xcuserdata
+DynamicLake Pro.xcodeproj/xcuserdata/hananrokach.xcuserdatad/
+.DS_Store
+.build/
+.swiftpm/
+.swiftpm-cache/
+.sourcepackages/
+.module-cache/
+.derivedData/
+NodeResources/DLP-Filen*
+
+build/

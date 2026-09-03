@@ -1,0 +1,62 @@
+DynamicLakeKit SDK License
+
+Copyright (c) 2026 Aviorrok. All rights reserved.
+
+This license applies to DynamicLakeKit and its documentation, source code,
+examples, and related files (the "SDK").
+
+1. License Grant
+
+Subject to this license, you may use the SDK only to build, test, and
+distribute apps, extensions, and integrations that work with DynamicLake.
+
+You may:
+
+- View and download the SDK source code.
+- Use the SDK through Swift Package Manager or another dependency manager.
+- Compile and link the SDK into your app or extension.
+- Distribute compiled apps or extensions that include the SDK as a dependency.
+
+2. Restrictions
+
+You may not:
+
+- Modify, adapt, translate, or create derivative works of the SDK.
+- Publish, redistribute, sublicense, sell, rent, lease, or provide the SDK as a
+  standalone source package, binary package, framework, or service.
+- Remove or alter copyright, trademark, attribution, or license notices.
+- Use the SDK to build or enable a competing host, clone, or replacement for
+  DynamicLake.
+- Use the DynamicLake or DynamicLakeKit names, logos, or branding except to
+  identify compatibility with DynamicLake.
+- Circumvent technical limits, access controls, signing, verification, or
+  distribution rules used by DynamicLake.
+
+3. No Implied Rights
+
+All rights not expressly granted by this license are reserved by Avior Rokach.
+This license does not transfer ownership of the SDK and does not grant patent,
+trademark, or other intellectual property rights except as expressly stated.
+
+4. Contributions
+
+This public repository is provided for SDK access and integration use. External
+contributions are not accepted unless Avior Rokach agrees to them in writing.
+
+5. Termination
+
+This license terminates automatically if you violate its terms. After
+termination, you must stop using the SDK and remove it from your projects unless
+Avior Rokach gives written permission to continue.
+
+6. Disclaimer
+
+THE SDK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, TITLE, AND NONINFRINGEMENT.
+
+7. Limitation Of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, AVIOR ROKACH WILL NOT BE LIABLE FOR ANY
+CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR RELATED TO THE SDK OR THIS
+LICENSE, WHETHER IN CONTRACT, TORT, OR OTHERWISE.

@@ -1,0 +1,1172 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.33.1 clang-2100.3.33.1)
+// swift-module-flags: -target arm64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -language-mode 5 -O -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name DynamicLakeKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import AppKit
+import Combine
+import CoreGraphics
+@_exported import DynamicLakeKit
+@_exported import ExtensionFoundation
+@_exported import ExtensionKit
+import Foundation
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum DynamicLakeExtensionPoint {
+  public static let hostBundleIdentifier: Swift::String
+  public static let name: Swift::String
+  public static let identifier: Swift::String
+}
+public enum DynamicLakeExtensionSceneID {
+  public static let liveActivityCompact: Swift::String
+  public static let extraLiveActivity: Swift::String
+  public static let liveActivitySneakPeek: Swift::String
+  public static let settings: Swift::String
+}
+public enum DynamicLakeExtensionInfoKey {
+  public static let supportsSettings: Swift::String
+  public static let displayName: Swift::String
+  public static let description: Swift::String
+  public static let developerName: Swift::String
+  public static let websiteURL: Swift::String
+  public static let supportURL: Swift::String
+  public static let minimumDynamicLakeKitVersion: Swift::String
+}
+public struct DynamicLakeExtensionMetadata : Swift::Hashable, Swift::Sendable {
+  public static let empty: DynamicLakeKit::DynamicLakeExtensionMetadata
+  public let displayName: Swift::String?
+  public let description: Swift::String?
+  public let developerName: Swift::String?
+  public let websiteURL: Swift::String?
+  public let supportURL: Swift::String?
+  public let minimumDynamicLakeKitVersion: Swift::String?
+  public init(displayName: Swift::String? = nil, description: Swift::String? = nil, developerName: Swift::String? = nil, websiteURL: Swift::String? = nil, supportURL: Swift::String? = nil, minimumDynamicLakeKitVersion: Swift::String? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeExtensionMetadata, b: DynamicLakeKit::DynamicLakeExtensionMetadata) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+public enum DynamicLakeActivityCommand : Swift::String, Swift::Hashable, Swift::Codable {
+  case setActive
+  case updateState
+  case close
+  case showSneakPeek
+  case closeSneakPeek
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeActivityIdentity {
+  public static func normalizedActivityIdentifier(_ activityIdentifier: Swift::String?, fallback extensionBundleIdentifier: Swift::String) -> Swift::String
+}
+public enum DynamicLakeActivityCenter {
+  public static let notificationName: Foundation::Notification.Foundation::Name
+  public enum UserInfoKey {
+    public static let command: Swift::String
+    public static let extensionBundleIdentifier: Swift::String
+    public static let activityIdentifier: Swift::String
+    public static let isActive: Swift::String
+    public static let priority: Swift::String
+    public static let supportsSneakPeek: Swift::String
+    public static let size: Swift::String
+    public static let title: Swift::String
+    public static let encodedState: Swift::String
+    public static let stateUpdatedAt: Swift::String
+    public static let isStateReplay: Swift::String
+    public static let isLiquidGlass: Swift::String
+  }
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func setActivityActive(_ isActive: Swift::Bool, extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil, title: Swift::String? = nil, priority: DynamicLakeKit::LiveActivityPriority = .normal, supportsSneakPeek: Swift::Bool = true, size: DynamicLakeKit::LiveActivitySize = .normal)
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func setActivityActive<State>(_ isActive: Swift::Bool, extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil, title: Swift::String? = nil, priority: DynamicLakeKit::LiveActivityPriority = .normal, supportsSneakPeek: Swift::Bool = true, size: DynamicLakeKit::LiveActivitySize = .normal, state: State, encoder: Foundation::JSONEncoder = JSONEncoder()) throws where State : Swift::Encodable
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func setActivityActive(_ isActive: Swift::Bool, extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil, title: Swift::String? = nil, priority: DynamicLakeKit::LiveActivityPriority = .normal, supportsSneakPeek: Swift::Bool = true, size: DynamicLakeKit::LiveActivitySize = .normal, encodedState: Foundation::Data?)
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func updateActivityState<State>(extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil, state: State, encoder: Foundation::JSONEncoder = JSONEncoder(), isLiquidGlass: Swift::Bool? = nil) throws where State : Swift::Encodable
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func updateActivityState(extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil, encodedState: Foundation::Data, isReplay: Swift::Bool = false, isLiquidGlass: Swift::Bool? = nil)
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func closeActivity(extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil)
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func showSneakPeek(extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil)
+  @available(macOSApplicationExtension, unavailable, message: "Post DynamicLake activity state from the companion app, not from the UI extension.")
+  public static func closeSneakPeek(extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil)
+}
+@_Concurrency::MainActor final public class DynamicLakeActivityStateReader<State> : Combine::ObservableObject where State : Swift::Decodable {
+  @Combine::Published<State?> @_projectedValueProperty($state) @_Concurrency::MainActor final public var state: State? {
+    get
+  }
+  @_Concurrency::MainActor final public var $state: Combine::Published<State?>.Combine::Publisher {
+    get
+  }
+  @Combine::Published<(any Swift::Error)?> @_projectedValueProperty($decodeError) @_Concurrency::MainActor final public var decodeError: (any Swift::Error)? {
+    get
+  }
+  @_Concurrency::MainActor final public var $decodeError: Combine::Published<(any Swift::Error)?>.Combine::Publisher {
+    get
+  }
+  @Combine::Published<Swift::Bool> @_projectedValueProperty($isLiquidGlass) @_Concurrency::MainActor final public var isLiquidGlass: Swift::Bool {
+    get
+  }
+  @_Concurrency::MainActor final public var $isLiquidGlass: Combine::Published<Swift::Bool>.Combine::Publisher {
+    get
+  }
+  @_Concurrency::MainActor final public let extensionBundleIdentifier: Swift::String
+  @_Concurrency::MainActor final public let activityIdentifier: Swift::String
+  @_Concurrency::MainActor convenience public init(activityIdentifier: Swift::String? = nil, initialState: State? = nil, decoder: Foundation::JSONDecoder = JSONDecoder(), isLiquidGlass: Swift::Bool = false)
+  @_Concurrency::MainActor public init(extensionBundleIdentifier: Swift::String, activityIdentifier: Swift::String? = nil, initialState: State? = nil, decoder: Foundation::JSONDecoder = JSONDecoder(), isLiquidGlass: Swift::Bool = false)
+  @objc deinit
+  public typealias ObjectWillChangePublisher = Combine::ObservableObjectPublisher
+}
+public protocol DynamicLakeExtension : ExtensionFoundation::AppExtension {
+  associatedtype Body : ExtensionKit::AppExtensionScene
+  @ExtensionKit::AppExtensionSceneBuilder var body: Self.Body { get }
+}
+public typealias DynamicLakeExtensionScene = ExtensionKit::AppExtensionScene
+public typealias DynamicLakeExtensionSceneBuilder = ExtensionKit::AppExtensionSceneBuilder
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeLiveActivity<Content> : ExtensionKit::AppExtensionScene where Content : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public init(@SwiftUICore::ViewBuilder content: @escaping () -> Content)
+  @_Concurrency::MainActor @preconcurrency public var body: some ExtensionKit::AppExtensionScene {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB12LiveActivityV4bodyQrvp", 0) __<Content>
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeExtraLiveActivity<Content> : ExtensionKit::AppExtensionScene where Content : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public init(@SwiftUICore::ViewBuilder content: @escaping () -> Content)
+  @_Concurrency::MainActor @preconcurrency public var body: some ExtensionKit::AppExtensionScene {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB17ExtraLiveActivityV4bodyQrvp", 0) __<Content>
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeSneakPeek<Content> : ExtensionKit::AppExtensionScene where Content : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public init(@SwiftUICore::ViewBuilder content: @escaping () -> Content)
+  @_Concurrency::MainActor @preconcurrency public var body: some ExtensionKit::AppExtensionScene {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB9SneakPeekV4bodyQrvp", 0) __<Content>
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeSettings<Content> : ExtensionKit::AppExtensionScene where Content : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public init(@SwiftUICore::ViewBuilder content: @escaping () -> Content)
+  @_Concurrency::MainActor @preconcurrency public var body: some ExtensionKit::AppExtensionScene {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB8SettingsV4bodyQrvp", 0) __<Content>
+}
+extension DynamicLakeKit::DynamicLakeExtension {
+  public var configuration: ExtensionKit::AppExtensionSceneConfiguration {
+    get
+  }
+}
+@available(macOS 26.2, *)
+extension DynamicLakeKit::DynamicLakeExtension {
+  public var extensionPoint: ExtensionFoundation::AppExtensionPoint {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginProtocol {
+  public static let schemaVersion: Swift::Int
+  public static let maxMessageBytes: Swift::Int
+  public static let maxInlineImageBytes: Swift::Int
+}
+public enum DynamicLakeJSONPluginCommandType : Swift::String, Swift::Codable, Swift::Hashable {
+  case create
+  case update
+  case dismiss
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginOutboundType : Swift::String, Swift::Codable, Swift::Hashable {
+  case action
+  case response
+  case error
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginActivityPriority : Swift::String, Swift::Codable, Swift::Hashable {
+  case low
+  case normal
+  case high
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginActivitySize : Swift::String, Swift::Codable, Swift::Hashable {
+  case small
+  case normal
+  case large
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginComponentType : Swift::String, Swift::Codable, Swift::Hashable {
+  case text
+  case image
+  case button
+  case progress
+  case timer
+  case status
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginTextStyle : Swift::String, Swift::Codable, Swift::Hashable {
+  case plain
+  case marquee
+  case compact
+  case timer
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginTint : Swift::String, Swift::Codable, Swift::Hashable {
+  case blue
+  case cyan
+  case teal
+  case indigo
+  case purple
+  case pink
+  case green
+  case orange
+  case yellow
+  case red
+  case gray
+  case white
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginImageSource : Swift::String, Swift::Codable, Swift::Hashable {
+  case sfSymbol
+  case appIcon
+  case inlineData
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginButtonRole : Swift::String, Swift::Codable, Swift::Hashable {
+  case normal
+  case destructive
+  case confirm
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginButtonShape : Swift::String, Swift::Codable, Swift::Hashable {
+  case circle
+  case roundedRect
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeJSONPluginStatus : Swift::String, Swift::Codable, Swift::Hashable {
+  case success
+  case failed
+  case inProgress
+  case paused
+  case warning
+  public init?(rawValue: Swift::String)
+  public typealias RawValue = Swift::String
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public struct DynamicLakeJSONPluginCommand : Swift::Codable, Swift::Hashable {
+  public var schemaVersion: Swift::Int
+  public var requestID: Swift::String?
+  public var type: DynamicLakeKit::DynamicLakeJSONPluginCommandType
+  public var activityID: Swift::String?
+  public var title: Swift::String?
+  public var priority: DynamicLakeKit::DynamicLakeJSONPluginActivityPriority?
+  public var size: DynamicLakeKit::DynamicLakeJSONPluginActivitySize?
+  public var surfaces: DynamicLakeKit::DynamicLakeJSONPluginSurfaces?
+  public init(schemaVersion: Swift::Int = DynamicLakeJSONPluginProtocol.schemaVersion, requestID: Swift::String? = nil, type: DynamicLakeKit::DynamicLakeJSONPluginCommandType, activityID: Swift::String? = nil, title: Swift::String? = nil, priority: DynamicLakeKit::DynamicLakeJSONPluginActivityPriority? = nil, size: DynamicLakeKit::DynamicLakeJSONPluginActivitySize? = nil, surfaces: DynamicLakeKit::DynamicLakeJSONPluginSurfaces? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginCommand, b: DynamicLakeKit::DynamicLakeJSONPluginCommand) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeJSONPluginSurfaces : Swift::Codable, Swift::Hashable {
+  public var compactLiveActivity: DynamicLakeKit::DynamicLakeJSONPluginCompactSurface?
+  public var sneakPeek: DynamicLakeKit::DynamicLakeJSONPluginSneakPeekSurface?
+  public init(compactLiveActivity: DynamicLakeKit::DynamicLakeJSONPluginCompactSurface? = nil, sneakPeek: DynamicLakeKit::DynamicLakeJSONPluginSneakPeekSurface? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginSurfaces, b: DynamicLakeKit::DynamicLakeJSONPluginSurfaces) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeJSONPluginCompactSurface : Swift::Codable, Swift::Hashable {
+  public var leftSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent?
+  public var rightSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent?
+  public init(leftSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent? = nil, rightSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginCompactSurface, b: DynamicLakeKit::DynamicLakeJSONPluginCompactSurface) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeJSONPluginSneakPeekSurface : Swift::Codable, Swift::Hashable {
+  public var leftSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent?
+  public var center: DynamicLakeKit::DynamicLakeJSONPluginComponent?
+  public var rightSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent?
+  public init(leftSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent? = nil, center: DynamicLakeKit::DynamicLakeJSONPluginComponent? = nil, rightSlot: DynamicLakeKit::DynamicLakeJSONPluginComponent? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginSneakPeekSurface, b: DynamicLakeKit::DynamicLakeJSONPluginSneakPeekSurface) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeJSONPluginComponent : Swift::Codable, Swift::Hashable {
+  public var type: DynamicLakeKit::DynamicLakeJSONPluginComponentType
+  public var id: Swift::String?
+  public var text: Swift::String?
+  public var style: DynamicLakeKit::DynamicLakeJSONPluginTextStyle?
+  public var tint: DynamicLakeKit::DynamicLakeJSONPluginTint?
+  public var source: DynamicLakeKit::DynamicLakeJSONPluginImageSource?
+  public var systemImage: Swift::String?
+  public var mimeType: Swift::String?
+  public var base64Data: Foundation::Data?
+  public var title: Swift::String?
+  public var actionID: Swift::String?
+  public var role: DynamicLakeKit::DynamicLakeJSONPluginButtonRole?
+  public var shape: DynamicLakeKit::DynamicLakeJSONPluginButtonShape?
+  public var value: Swift::Double?
+  public var status: DynamicLakeKit::DynamicLakeJSONPluginStatus?
+  public var startDate: Swift::String?
+  public var endDate: Swift::String?
+  public var countsDown: Swift::Bool?
+  public init(type: DynamicLakeKit::DynamicLakeJSONPluginComponentType, id: Swift::String? = nil, text: Swift::String? = nil, style: DynamicLakeKit::DynamicLakeJSONPluginTextStyle? = nil, tint: DynamicLakeKit::DynamicLakeJSONPluginTint? = nil, source: DynamicLakeKit::DynamicLakeJSONPluginImageSource? = nil, systemImage: Swift::String? = nil, mimeType: Swift::String? = nil, base64Data: Foundation::Data? = nil, title: Swift::String? = nil, actionID: Swift::String? = nil, role: DynamicLakeKit::DynamicLakeJSONPluginButtonRole? = nil, shape: DynamicLakeKit::DynamicLakeJSONPluginButtonShape? = nil, value: Swift::Double? = nil, status: DynamicLakeKit::DynamicLakeJSONPluginStatus? = nil, startDate: Swift::String? = nil, endDate: Swift::String? = nil, countsDown: Swift::Bool? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginComponent, b: DynamicLakeKit::DynamicLakeJSONPluginComponent) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeJSONPluginActionCallback : Swift::Codable, Swift::Hashable {
+  public var schemaVersion: Swift::Int
+  public var type: DynamicLakeKit::DynamicLakeJSONPluginOutboundType
+  public var requestID: Swift::String?
+  public var activityID: Swift::String
+  public var actionID: Swift::String
+  public var componentID: Swift::String?
+  public var surface: Swift::String?
+  public init(schemaVersion: Swift::Int = DynamicLakeJSONPluginProtocol.schemaVersion, type: DynamicLakeKit::DynamicLakeJSONPluginOutboundType = .action, requestID: Swift::String? = nil, activityID: Swift::String, actionID: Swift::String, componentID: Swift::String? = nil, surface: Swift::String? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginActionCallback, b: DynamicLakeKit::DynamicLakeJSONPluginActionCallback) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeJSONPluginResponse : Swift::Codable, Swift::Hashable {
+  public var schemaVersion: Swift::Int
+  public var type: DynamicLakeKit::DynamicLakeJSONPluginOutboundType
+  public var requestID: Swift::String?
+  public var activityID: Swift::String?
+  public var ok: Swift::Bool
+  public var error: Swift::String?
+  public init(schemaVersion: Swift::Int = DynamicLakeJSONPluginProtocol.schemaVersion, type: DynamicLakeKit::DynamicLakeJSONPluginOutboundType = .response, requestID: Swift::String? = nil, activityID: Swift::String? = nil, ok: Swift::Bool, error: Swift::String? = nil)
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginResponse, b: DynamicLakeKit::DynamicLakeJSONPluginResponse) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public enum DynamicLakeJSONPluginValidationError : Foundation::LocalizedError, Swift::Equatable {
+  case messageTooLarge(Swift::Int)
+  case invalidJSON
+  case expectedObject
+  case unknownField(Swift::String, path: Swift::String)
+  case missingField(Swift::String, path: Swift::String)
+  case invalidField(Swift::String, path: Swift::String)
+  case unsupportedSchemaVersion(Swift::Int)
+  case unsupportedComponent(Swift::String)
+  case unsupportedCommand(Swift::String)
+  public var errorDescription: Swift::String? {
+    get
+  }
+  public static func == (a: DynamicLakeKit::DynamicLakeJSONPluginValidationError, b: DynamicLakeKit::DynamicLakeJSONPluginValidationError) -> Swift::Bool
+}
+public enum DynamicLakeJSONPluginValidator {
+  public static func decodeCommand(from data: Foundation::Data) throws -> DynamicLakeKit::DynamicLakeJSONPluginCommand
+  public static func iso8601Date(from string: Swift::String) -> Foundation::Date?
+}
+public enum SneakPeekSlotSide : Swift::String, Swift::CaseIterable, Swift::Hashable, Swift::Codable {
+  case left
+  case center
+  case right
+  public init?(rawValue: Swift::String)
+  public typealias AllCases = [DynamicLakeKit::SneakPeekSlotSide]
+  public typealias RawValue = Swift::String
+  nonisolated public static var allCases: [DynamicLakeKit::SneakPeekSlotSide] {
+    get
+  }
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public struct SneakPeekSlotMetrics : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  public let frame: CoreFoundation::CGRect
+  public init(frame: CoreFoundation::CGRect)
+  public var width: CoreFoundation::CGFloat {
+    get
+  }
+  public var height: CoreFoundation::CGFloat {
+    get
+  }
+  public var centerX: CoreFoundation::CGFloat {
+    get
+  }
+  public var centerY: CoreFoundation::CGFloat {
+    get
+  }
+  public static func == (a: DynamicLakeKit::SneakPeekSlotMetrics, b: DynamicLakeKit::SneakPeekSlotMetrics) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct SneakPeekLayoutMetrics : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  public let left: DynamicLakeKit::SneakPeekSlotMetrics
+  public let center: DynamicLakeKit::SneakPeekSlotMetrics
+  public let right: DynamicLakeKit::SneakPeekSlotMetrics
+  public init(left: DynamicLakeKit::SneakPeekSlotMetrics, center: DynamicLakeKit::SneakPeekSlotMetrics, right: DynamicLakeKit::SneakPeekSlotMetrics)
+  public static func == (a: DynamicLakeKit::SneakPeekLayoutMetrics, b: DynamicLakeKit::SneakPeekLayoutMetrics) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public enum SneakPeekSlotSizing : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  case fixed(CoreFoundation::CGFloat)
+  case reserved(contentWidth: CoreFoundation::CGFloat, leading: CoreFoundation::CGFloat, trailing: CoreFoundation::CGFloat)
+  case empty
+  public var width: CoreFoundation::CGFloat {
+    get
+  }
+  public var contentWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var leadingReserve: CoreFoundation::CGFloat {
+    get
+  }
+  public var trailingReserve: CoreFoundation::CGFloat {
+    get
+  }
+  public func reservingLeading(_ reserve: CoreFoundation::CGFloat) -> DynamicLakeKit::SneakPeekSlotSizing
+  public func reservingTrailing(_ reserve: CoreFoundation::CGFloat) -> DynamicLakeKit::SneakPeekSlotSizing
+  public func reserving(leading: CoreFoundation::CGFloat = 0, trailing: CoreFoundation::CGFloat = 0) -> DynamicLakeKit::SneakPeekSlotSizing
+  public static func == (a: DynamicLakeKit::SneakPeekSlotSizing, b: DynamicLakeKit::SneakPeekSlotSizing) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+@_Concurrency::MainActor @preconcurrency public struct SneakPeekEmptySlot : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public init()
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit18SneakPeekEmptySlotV4bodyQrvp", 0) __
+}
+public enum SneakPeekSlot {
+  public static var empty: DynamicLakeKit::SneakPeekEmptySlot {
+    get
+  }
+}
+public enum SneakPeekControlMetrics {
+  public static let slotSize: CoreFoundation::CGFloat
+  public static let circleSize: CoreFoundation::CGFloat
+  public static let symbolSize: CoreFoundation::CGFloat
+  public static let textHeight: CoreFoundation::CGFloat
+  public static let previewCornerRadius: CoreFoundation::CGFloat
+}
+extension SwiftUICore::View where Self == DynamicLakeKit::SneakPeekEmptySlot {
+  @_Concurrency::MainActor @preconcurrency public static var empty: DynamicLakeKit::SneakPeekEmptySlot {
+    get
+  }
+}
+public struct SneakPeekGeometry : Swift::Equatable {
+  public static let defaultContentHeight: CoreFoundation::CGFloat
+  public static let defaultContentBottomPadding: CoreFoundation::CGFloat
+  public static let defaultHorizontalPadding: CoreFoundation::CGFloat
+  public static let separatorWidthFraction: CoreFoundation::CGFloat
+  public static let separatorHorizontalInset: CoreFoundation::CGFloat
+  public static let defaultSideSlotWidth: CoreFoundation::CGFloat
+  public static let defaultSideSpacing: CoreFoundation::CGFloat
+  public let width: CoreFoundation::CGFloat
+  public let height: CoreFoundation::CGFloat
+  public let liveActivityGeometry: DynamicLakeKit::LiveActivityGeometry
+  public let leftAnchorVisualWidth: CoreFoundation::CGFloat
+  public let rightAnchorVisualWidth: CoreFoundation::CGFloat
+  public let leftAnchorExtraPadding: CoreFoundation::CGFloat
+  public let rightAnchorExtraPadding: CoreFoundation::CGFloat
+  public init(width: CoreFoundation::CGFloat, height: CoreFoundation::CGFloat = Self.defaultContentHeight, liveActivityGeometry: DynamicLakeKit::LiveActivityGeometry, leftAnchorVisualWidth: CoreFoundation::CGFloat? = nil, rightAnchorVisualWidth: CoreFoundation::CGFloat? = nil, leftAnchorExtraPadding: CoreFoundation::CGFloat = 0, rightAnchorExtraPadding: CoreFoundation::CGFloat = 0)
+  public static func current<Activity>(activity: Activity, panelSize: CoreFoundation::CGSize? = nil, contentHeight: CoreFoundation::CGFloat? = nil, physicalNotchWidth: CoreFoundation::CGFloat? = nil, enforcesMinimumSideSlots: Swift::Bool = true, leftAnchorVisualWidth: CoreFoundation::CGFloat? = nil, rightAnchorVisualWidth: CoreFoundation::CGFloat? = nil, leftAnchorExtraPadding: CoreFoundation::CGFloat = 0, rightAnchorExtraPadding: CoreFoundation::CGFloat = 0, screenKind: DynamicLakeKit::LiveActivityScreenKind = .current) -> DynamicLakeKit::SneakPeekGeometry where Activity : DynamicLakeKit::DynamicLakeActivity
+  public func fitting(width: CoreFoundation::CGFloat? = nil, height: CoreFoundation::CGFloat? = nil) -> DynamicLakeKit::SneakPeekGeometry
+  public func layout(leftSlotSizing: DynamicLakeKit::SneakPeekSlotSizing = .fixed(Self.defaultSideSlotWidth), rightSlotSizing: DynamicLakeKit::SneakPeekSlotSizing = .fixed(Self.defaultSideSlotWidth), sideSpacing: CoreFoundation::CGFloat = Self.defaultSideSpacing) -> DynamicLakeKit::SneakPeekLayoutMetrics
+  public func anchorX(for side: DynamicLakeKit::SneakPeekSlotSide) -> CoreFoundation::CGFloat
+  public static func == (a: DynamicLakeKit::SneakPeekGeometry, b: DynamicLakeKit::SneakPeekGeometry) -> Swift::Bool
+}
+@_Concurrency::MainActor @preconcurrency public struct SneakPeekSlotLayout<LeftSlot, CenterSlot, RightSlot> : SwiftUICore::View where LeftSlot : SwiftUICore::View, CenterSlot : SwiftUICore::View, RightSlot : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let geometry: DynamicLakeKit::SneakPeekGeometry
+  @_Concurrency::MainActor @preconcurrency public var leftSlotSizing: DynamicLakeKit::SneakPeekSlotSizing
+  @_Concurrency::MainActor @preconcurrency public var rightSlotSizing: DynamicLakeKit::SneakPeekSlotSizing
+  @_Concurrency::MainActor @preconcurrency public var sideSpacing: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var leftAlignment: SwiftUICore::Alignment
+  @_Concurrency::MainActor @preconcurrency public var centerAlignment: SwiftUICore::Alignment
+  @_Concurrency::MainActor @preconcurrency public var rightAlignment: SwiftUICore::Alignment
+  @_Concurrency::MainActor @preconcurrency public init(geometry: DynamicLakeKit::SneakPeekGeometry, leftSlotSizing: DynamicLakeKit::SneakPeekSlotSizing = .fixed(SneakPeekGeometry.defaultSideSlotWidth), rightSlotSizing: DynamicLakeKit::SneakPeekSlotSizing = .fixed(SneakPeekGeometry.defaultSideSlotWidth), sideSpacing: CoreFoundation::CGFloat = SneakPeekGeometry.defaultSideSpacing, leftAlignment: SwiftUICore::Alignment = .center, centerAlignment: SwiftUICore::Alignment = .leading, rightAlignment: SwiftUICore::Alignment = .center, @SwiftUICore::ViewBuilder left: () -> LeftSlot, @SwiftUICore::ViewBuilder center: () -> CenterSlot, @SwiftUICore::ViewBuilder right: () -> RightSlot)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit19SneakPeekSlotLayoutV4bodyQrvp", 0) __<LeftSlot, CenterSlot, RightSlot>
+}
+public enum LiveActivityPriority : Swift::Int, Swift::CaseIterable, Swift::Hashable, Swift::Codable, Swift::Comparable {
+  case low
+  case normal
+  case high
+  public static func < (lhs: DynamicLakeKit::LiveActivityPriority, rhs: DynamicLakeKit::LiveActivityPriority) -> Swift::Bool
+  public init?(rawValue: Swift::Int)
+  public typealias AllCases = [DynamicLakeKit::LiveActivityPriority]
+  public typealias RawValue = Swift::Int
+  nonisolated public static var allCases: [DynamicLakeKit::LiveActivityPriority] {
+    get
+  }
+  public var rawValue: Swift::Int {
+    get
+  }
+}
+public struct LiveActivityColor : Swift::Hashable, Swift::Codable {
+  public var red: Swift::Double
+  public var green: Swift::Double
+  public var blue: Swift::Double
+  public var opacity: Swift::Double
+  public static let white: DynamicLakeKit::LiveActivityColor
+  public static let defaultLiquidGlassText: DynamicLakeKit::LiveActivityColor
+  public init(red: Swift::Double, green: Swift::Double, blue: Swift::Double, opacity: Swift::Double = 1)
+  public var swiftUIColor: SwiftUICore::Color {
+    get
+  }
+  public static func == (a: DynamicLakeKit::LiveActivityColor, b: DynamicLakeKit::LiveActivityColor) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public protocol DynamicLakeActivity {
+  var id: Swift::String { get }
+  var priority: DynamicLakeKit::LiveActivityPriority { get }
+  var size: DynamicLakeKit::LiveActivitySize { get }
+  var liquidGlassTextColor: DynamicLakeKit::LiveActivityColor { get }
+  var supportsSneakPeek: Swift::Bool { get }
+  var panelSize: Foundation::NSSize { get }
+  var panelRadius: CoreFoundation::CGFloat { get }
+}
+extension DynamicLakeKit::DynamicLakeActivity {
+  public var supportsSneakPeek: Swift::Bool {
+    get
+  }
+  public var panelSize: Foundation::NSSize {
+    get
+  }
+  public var panelRadius: CoreFoundation::CGFloat {
+    get
+  }
+}
+public struct DynamicLakeLiveActivityConfiguration : Swift::Identifiable, Swift::Hashable, Swift::Codable, DynamicLakeKit::DynamicLakeActivity {
+  public var id: Swift::String
+  public var priority: DynamicLakeKit::LiveActivityPriority
+  public var size: DynamicLakeKit::LiveActivitySize
+  public var liquidGlassTextColor: DynamicLakeKit::LiveActivityColor
+  public var supportsSneakPeek: Swift::Bool
+  public var customPanelSize: CoreFoundation::CGSize?
+  public var customPanelRadius: CoreFoundation::CGFloat?
+  public var leftSymbolExtraLeadingPadding: Swift::Double
+  public var rightAccessoryExtraTrailingPadding: Swift::Double
+  public init(id: Swift::String, priority: DynamicLakeKit::LiveActivityPriority = .normal, size: DynamicLakeKit::LiveActivitySize = .normal, liquidGlassTextColor: DynamicLakeKit::LiveActivityColor = .defaultLiquidGlassText, supportsSneakPeek: Swift::Bool = true, panelSize: CoreFoundation::CGSize? = nil, panelRadius: CoreFoundation::CGFloat? = nil, leftSymbolExtraLeadingPadding: Swift::Double = 0, rightAccessoryExtraTrailingPadding: Swift::Double = 0)
+  public var panelSize: Foundation::NSSize {
+    get
+  }
+  public var panelRadius: CoreFoundation::CGFloat {
+    get
+  }
+  public static func == (a: DynamicLakeKit::DynamicLakeLiveActivityConfiguration, b: DynamicLakeKit::DynamicLakeLiveActivityConfiguration) -> Swift::Bool
+  public typealias ID = Swift::String
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public protocol DynamicLakeLiveActivityState : Swift::Decodable, Swift::Encodable, Swift::Hashable {
+}
+public struct DynamicLakeEmptyLiveActivityState : DynamicLakeKit::DynamicLakeLiveActivityState {
+  public init()
+  public static func == (a: DynamicLakeKit::DynamicLakeEmptyLiveActivityState, b: DynamicLakeKit::DynamicLakeEmptyLiveActivityState) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct DynamicLakeLiveActivityContext<State> where State : DynamicLakeKit::DynamicLakeLiveActivityState {
+  public let configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration
+  public let state: State
+  public let geometry: DynamicLakeKit::LiveActivityGeometry
+  public let isLiquidGlass: Swift::Bool
+  public init(configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration, state: State, geometry: DynamicLakeKit::LiveActivityGeometry, isLiquidGlass: Swift::Bool = false)
+  public var textColor: SwiftUICore::Color {
+    get
+  }
+  public var compactSymbolVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var leftSymbolExtraLeadingPadding: CoreFoundation::CGFloat {
+    get
+  }
+  public var rightAccessoryExtraTrailingPadding: CoreFoundation::CGFloat {
+    get
+  }
+}
+public struct DynamicLakeSneakPeekContext<State> where State : DynamicLakeKit::DynamicLakeLiveActivityState {
+  public let configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration
+  public let state: State
+  public let geometry: DynamicLakeKit::SneakPeekGeometry
+  public let isLiquidGlass: Swift::Bool
+  public init(configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration, state: State, geometry: DynamicLakeKit::SneakPeekGeometry, isLiquidGlass: Swift::Bool = false)
+  public var textColor: SwiftUICore::Color {
+    get
+  }
+}
+public protocol DynamicLakeLiveActivityViewProvider {
+  associatedtype State : DynamicLakeKit::DynamicLakeLiveActivityState = DynamicLakeKit::DynamicLakeEmptyLiveActivityState
+  associatedtype CompactView : SwiftUICore::View
+  associatedtype SneakPeekView : SwiftUICore::View
+  var configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration { get }
+  @SwiftUICore::ViewBuilder func compactView(context: DynamicLakeKit::DynamicLakeLiveActivityContext<Self.State>) -> Self.CompactView
+  @SwiftUICore::ViewBuilder func sneakPeekView(context: DynamicLakeKit::DynamicLakeSneakPeekContext<Self.State>) -> Self.SneakPeekView
+}
+extension DynamicLakeKit::DynamicLakeLiveActivityViewProvider {
+  public func liveActivityGeometry(totalSize: CoreFoundation::CGSize? = nil, physicalNotchWidth: CoreFoundation::CGFloat? = nil, enforcesMinimumSideSlots: Swift::Bool = true, slotInsets: DynamicLakeKit::LiveActivitySlotInsets = .standard, slotVisualFit: DynamicLakeKit::LiveActivitySlotVisualFit = .proportional, screenKind: DynamicLakeKit::LiveActivityScreenKind = .current) -> DynamicLakeKit::LiveActivityGeometry
+  public func sneakPeekGeometry(panelSize: CoreFoundation::CGSize? = nil, contentHeight: CoreFoundation::CGFloat? = nil, enforcesMinimumSideSlots: Swift::Bool = true, leftAnchorVisualWidth: CoreFoundation::CGFloat? = nil, rightAnchorVisualWidth: CoreFoundation::CGFloat? = nil, leftAnchorExtraPadding: CoreFoundation::CGFloat? = nil, rightAnchorExtraPadding: CoreFoundation::CGFloat? = nil) -> DynamicLakeKit::SneakPeekGeometry
+}
+public protocol DynamicLakeLiveActivityExtension {
+  init()
+  func registerActivities(with registrar: any DynamicLakeKit::DynamicLakeLiveActivityRegistrar)
+}
+public protocol DynamicLakeLiveActivityRegistrar : AnyObject {
+  func register<Provider>(_ provider: Provider, initialState: Provider.State) where Provider : DynamicLakeKit::DynamicLakeLiveActivityViewProvider
+}
+extension DynamicLakeKit::DynamicLakeLiveActivityRegistrar {
+  public func register<Provider>(_ provider: Provider) where Provider : DynamicLakeKit::DynamicLakeLiveActivityViewProvider, Provider.State == DynamicLakeKit::DynamicLakeEmptyLiveActivityState
+}
+public struct AnyDynamicLakeLiveActivityProvider {
+  public let configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration
+  public init<Provider>(_ provider: Provider, initialState: Provider.State) where Provider : DynamicLakeKit::DynamicLakeLiveActivityViewProvider
+  public func compactView(state: Swift::AnyHashable, geometry: DynamicLakeKit::LiveActivityGeometry, isLiquidGlass: Swift::Bool = false) -> SwiftUICore::AnyView
+  public func sneakPeekView(state: Swift::AnyHashable, geometry: DynamicLakeKit::SneakPeekGeometry, isLiquidGlass: Swift::Bool = false) -> SwiftUICore::AnyView
+}
+public enum LiveActivitySlotSide : Swift::String, Swift::CaseIterable, Swift::Hashable, Swift::Codable {
+  case left
+  case right
+  public init?(rawValue: Swift::String)
+  public typealias AllCases = [DynamicLakeKit::LiveActivitySlotSide]
+  public typealias RawValue = Swift::String
+  nonisolated public static var allCases: [DynamicLakeKit::LiveActivitySlotSide] {
+    get
+  }
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public struct LiveActivitySlotInsets : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  public static let defaultBaseInset: CoreFoundation::CGFloat
+  public static let standard: DynamicLakeKit::LiveActivitySlotInsets
+  public var baseInset: CoreFoundation::CGFloat
+  public var leftExtraInset: CoreFoundation::CGFloat
+  public var rightExtraInset: CoreFoundation::CGFloat
+  public init(baseInset: CoreFoundation::CGFloat = Self.defaultBaseInset, leftExtraInset: CoreFoundation::CGFloat = 0, rightExtraInset: CoreFoundation::CGFloat = 0)
+  public func inset(for side: DynamicLakeKit::LiveActivitySlotSide, extra: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public static func == (a: DynamicLakeKit::LiveActivitySlotInsets, b: DynamicLakeKit::LiveActivitySlotInsets) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public struct LiveActivitySlotVisualLayout : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  public let visualWidth: CoreFoundation::CGFloat
+  public let inset: CoreFoundation::CGFloat
+  public let scale: CoreFoundation::CGFloat
+  public init(visualWidth: CoreFoundation::CGFloat, inset: CoreFoundation::CGFloat, scale: CoreFoundation::CGFloat)
+  public static func == (a: DynamicLakeKit::LiveActivitySlotVisualLayout, b: DynamicLakeKit::LiveActivitySlotVisualLayout) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public enum LiveActivitySlotVisualFit : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  case proportional
+  case preserveVisual(minimumInset: CoreFoundation::CGFloat)
+  public static func == (a: DynamicLakeKit::LiveActivitySlotVisualFit, b: DynamicLakeKit::LiveActivitySlotVisualFit) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public enum LiveActivityScreenKind : Swift::Equatable, Swift::Hashable, Swift::Codable {
+  case notch
+  case nonNotch(highResolution: Swift::Bool)
+  public var isNonNotch: Swift::Bool {
+    get
+  }
+  public var isHighResolution: Swift::Bool {
+    get
+  }
+  public static var current: DynamicLakeKit::LiveActivityScreenKind {
+    get
+  }
+  public static func == (a: DynamicLakeKit::LiveActivityScreenKind, b: DynamicLakeKit::LiveActivityScreenKind) -> Swift::Bool
+  public func encode(to encoder: any Swift::Encoder) throws
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+  public init(from decoder: any Swift::Decoder) throws
+}
+public enum LiveActivitySize : Swift::String, Swift::CaseIterable, Swift::Hashable, Swift::Codable {
+  case small
+  case normal
+  case large
+  public var defaultTotalSize: CoreFoundation::CGSize {
+    get
+  }
+  public var panelRadius: CoreFoundation::CGFloat {
+    get
+  }
+  public var centerGapMultiplier: CoreFoundation::CGFloat {
+    get
+  }
+  public var referenceWingWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public init?(rawValue: Swift::String)
+  public typealias AllCases = [DynamicLakeKit::LiveActivitySize]
+  public typealias RawValue = Swift::String
+  nonisolated public static var allCases: [DynamicLakeKit::LiveActivitySize] {
+    get
+  }
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public struct LiveActivityGeometry : Swift::Equatable {
+  public static let defaultPhysicalNotchWidth: CoreFoundation::CGFloat
+  public let size: DynamicLakeKit::LiveActivitySize
+  public let totalWidth: CoreFoundation::CGFloat
+  public let height: CoreFoundation::CGFloat
+  public let physicalNotchWidth: CoreFoundation::CGFloat
+  public let centerGapWidth: CoreFoundation::CGFloat
+  public let sideSlotWidth: CoreFoundation::CGFloat
+  public let enforcesMinimumSideSlots: Swift::Bool
+  public let slotInsets: DynamicLakeKit::LiveActivitySlotInsets
+  public let slotVisualFit: DynamicLakeKit::LiveActivitySlotVisualFit
+  public let screenKind: DynamicLakeKit::LiveActivityScreenKind
+  public var leftSlotWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var rightSlotWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var widthScale: CoreFoundation::CGFloat {
+    get
+  }
+  public var slimScale: CoreFoundation::CGFloat {
+    get
+  }
+  public var artworkVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var accessoryVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var liveWaveformVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactSymbolVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactAppIconVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactAccessoryButtonVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactStatusAccessoryVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactProgressAccessoryVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactProgressRingVisualWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactSymbolFontSize: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactOverlaySymbolFontSize: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactMenuBarFontSize: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactTextFontSize: CoreFoundation::CGFloat {
+    get
+  }
+  public var compactProminentTextFontSize: CoreFoundation::CGFloat {
+    get
+  }
+  public var liveActivityPanelRadius: CoreFoundation::CGFloat {
+    get
+  }
+  public var slotContentPadding: CoreFoundation::CGFloat {
+    get
+  }
+  public var leftSlotContentWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public var rightSlotContentWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public init(size: DynamicLakeKit::LiveActivitySize = .normal, totalSize: CoreFoundation::CGSize? = nil, physicalNotchWidth: CoreFoundation::CGFloat? = nil, enforcesMinimumSideSlots: Swift::Bool = true, slotInsets: DynamicLakeKit::LiveActivitySlotInsets = .standard, slotVisualFit: DynamicLakeKit::LiveActivitySlotVisualFit = .proportional, screenKind: DynamicLakeKit::LiveActivityScreenKind = .current)
+  public init(size: DynamicLakeKit::LiveActivitySize = .normal, totalWidth: CoreFoundation::CGFloat, height: CoreFoundation::CGFloat, physicalNotchWidth: CoreFoundation::CGFloat? = nil, enforcesMinimumSideSlots: Swift::Bool = true, slotInsets: DynamicLakeKit::LiveActivitySlotInsets = .standard, slotVisualFit: DynamicLakeKit::LiveActivitySlotVisualFit = .proportional, screenKind: DynamicLakeKit::LiveActivityScreenKind = .current)
+  public func slotInset(forVisualWidth visualWidth: CoreFoundation::CGFloat, extraLeadingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func accessorySlotInset(forVisualWidth visualWidth: CoreFoundation::CGFloat, extraTrailingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func leftSlotContentPadding(extraLeadingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func rightSlotContentPadding(extraTrailingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func rightSlotContentOffset(extraTrailingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func leftSlotAvailableContentWidth(extraLeadingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func rightSlotAvailableContentWidth(extraTrailingPadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func leftSlotVisualLayout(visualWidth: CoreFoundation::CGFloat, extraLeadingPadding: CoreFoundation::CGFloat = 0) -> DynamicLakeKit::LiveActivitySlotVisualLayout
+  public func rightSlotVisualLayout(visualWidth: CoreFoundation::CGFloat, extraTrailingPadding: CoreFoundation::CGFloat = 0) -> DynamicLakeKit::LiveActivitySlotVisualLayout
+  public func compactScreenAdjustedVisualWidth(_ visualWidth: CoreFoundation::CGFloat, nonNotchMinimum: CoreFoundation::CGFloat, highResolutionMinimum: CoreFoundation::CGFloat) -> CoreFoundation::CGFloat
+  public func slotVisualWidth(referenceSize: CoreFoundation::CGFloat, nonNotchMinimum: CoreFoundation::CGFloat? = nil, highResolutionMinimum: CoreFoundation::CGFloat? = nil) -> CoreFoundation::CGFloat
+  public func compactTextSlotContentWidth(for side: DynamicLakeKit::LiveActivitySlotSide = .right, edgePadding: CoreFoundation::CGFloat? = nil, extraEdgePadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public func compactTextSlotEdgePadding(for side: DynamicLakeKit::LiveActivitySlotSide = .right, edgePadding: CoreFoundation::CGFloat? = nil, extraEdgePadding: CoreFoundation::CGFloat = 0) -> CoreFoundation::CGFloat
+  public static func adaptiveCompactLiveActivityTotalSize(for size: DynamicLakeKit::LiveActivitySize, screenKind: DynamicLakeKit::LiveActivityScreenKind = .current) -> CoreFoundation::CGSize
+  public static func currentOnActiveScreen(size: DynamicLakeKit::LiveActivitySize = .normal, totalSize: CoreFoundation::CGSize? = nil, physicalNotchWidth: CoreFoundation::CGFloat? = nil, enforcesMinimumSideSlots: Swift::Bool = true, slotInsets: DynamicLakeKit::LiveActivitySlotInsets = .standard, slotVisualFit: DynamicLakeKit::LiveActivitySlotVisualFit? = nil, screenKind: DynamicLakeKit::LiveActivityScreenKind = .current) -> DynamicLakeKit::LiveActivityGeometry
+  public static func minimumTotalWidth(size: DynamicLakeKit::LiveActivitySize, physicalNotchWidth: CoreFoundation::CGFloat = Self.currentPhysicalNotchWidth) -> CoreFoundation::CGFloat
+  public static var currentPhysicalNotchWidth: CoreFoundation::CGFloat {
+    get
+  }
+  public static func == (a: DynamicLakeKit::LiveActivityGeometry, b: DynamicLakeKit::LiveActivityGeometry) -> Swift::Bool
+}
+public enum DynamicLakeLiveActivitySimulatorMode : Swift::String, Swift::CaseIterable, Swift::Hashable {
+  case compact
+  case sneakPeek
+  case extraLiveActivity
+  case both
+  case all
+  public var title: Swift::String {
+    get
+  }
+  public init?(rawValue: Swift::String)
+  public typealias AllCases = [DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode]
+  public typealias RawValue = Swift::String
+  nonisolated public static var allCases: [DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode] {
+    get
+  }
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public enum DynamicLakeLiveActivitySimulatorShape : Swift::String, Swift::CaseIterable, Swift::Hashable, Swift::Identifiable {
+  case notch
+  case pill
+  public var id: Swift::String {
+    get
+  }
+  public var title: Swift::String {
+    get
+  }
+  public init?(rawValue: Swift::String)
+  public typealias AllCases = [DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape]
+  public typealias ID = Swift::String
+  public typealias RawValue = Swift::String
+  nonisolated public static var allCases: [DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape] {
+    get
+  }
+  public var rawValue: Swift::String {
+    get
+  }
+}
+public struct DynamicLakeLiveActivitySimulatorMetrics : Swift::Hashable {
+  public let logicalSize: CoreFoundation::CGSize
+  public let visualSize: CoreFoundation::CGSize
+  public let horizontalSkipScaleX: CoreFoundation::CGFloat
+  public let verticalGestureScaleY: CoreFoundation::CGFloat
+  public let centeredScaleX: CoreFoundation::CGFloat
+  public let centeredScaleY: CoreFoundation::CGFloat
+  public let totalScaleX: CoreFoundation::CGFloat
+  public let totalScaleY: CoreFoundation::CGFloat
+  public let blurRadius: CoreFoundation::CGFloat
+  public let opacity: CoreFoundation::CGFloat
+  public init(logicalSize: CoreFoundation::CGSize, visualSize: CoreFoundation::CGSize, horizontalSkipScaleX: CoreFoundation::CGFloat, verticalGestureScaleY: CoreFoundation::CGFloat, centeredScaleX: CoreFoundation::CGFloat, centeredScaleY: CoreFoundation::CGFloat, totalScaleX: CoreFoundation::CGFloat, totalScaleY: CoreFoundation::CGFloat, blurRadius: CoreFoundation::CGFloat, opacity: CoreFoundation::CGFloat)
+  public static func == (a: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMetrics, b: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMetrics) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+public struct DynamicLakeLiveActivitySimulatorEffects : Swift::Hashable {
+  public static let identity: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects
+  public var scale: CoreFoundation::CGFloat
+  public var squeezeDownAmount: CoreFoundation::CGFloat
+  public var scrollUpAmount: CoreFoundation::CGFloat
+  public var hoverScaleX: CoreFoundation::CGFloat
+  public var hoverScaleY: CoreFoundation::CGFloat
+  public var horizontalSkipAmount: CoreFoundation::CGFloat
+  public init(scale: CoreFoundation::CGFloat = 1.0, squeezeDownAmount: CoreFoundation::CGFloat = 0, scrollUpAmount: CoreFoundation::CGFloat = 0, hoverScaleX: CoreFoundation::CGFloat = 1.0, hoverScaleY: CoreFoundation::CGFloat = 1.0, horizontalSkipAmount: CoreFoundation::CGFloat = 0)
+  public func metrics(for logicalSize: CoreFoundation::CGSize) -> DynamicLakeKit::DynamicLakeLiveActivitySimulatorMetrics
+  public static func == (a: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects, b: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+public struct DynamicLakeNotchShape : SwiftUICore::Shape {
+  public var topCornerRadius: CoreFoundation::CGFloat
+  public var bottomCornerRadius: CoreFoundation::CGFloat
+  public var smoothness: CoreFoundation::CGFloat
+  public var isPill: Swift::Bool
+  public var cornerCap: CoreFoundation::CGFloat
+  public init(topCornerRadius: CoreFoundation::CGFloat, bottomCornerRadius: CoreFoundation::CGFloat, smoothness: CoreFoundation::CGFloat = 0.9, isPill: Swift::Bool = false, cornerCap: CoreFoundation::CGFloat = 48)
+  nonisolated public var animatableData: SwiftUICore::AnimatablePair<SwiftUICore::AnimatablePair<CoreFoundation::CGFloat, CoreFoundation::CGFloat>, CoreFoundation::CGFloat> {
+    get
+    set
+  }
+  nonisolated public func path(in rect: CoreFoundation::CGRect) -> SwiftUICore::Path
+  public typealias AnimatableData = SwiftUICore::AnimatablePair<SwiftUICore::AnimatablePair<CoreFoundation::CGFloat, CoreFoundation::CGFloat>, CoreFoundation::CGFloat>
+  public typealias Body = SwiftUICore::_ShapeView<DynamicLakeKit::DynamicLakeNotchShape, SwiftUICore::ForegroundStyle>
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeLiveActivitySimulator<Provider> : SwiftUICore::View where Provider : DynamicLakeKit::DynamicLakeLiveActivityViewProvider {
+  @_Concurrency::MainActor @preconcurrency public let provider: Provider
+  @_Concurrency::MainActor @preconcurrency public let state: Provider.State
+  @_Concurrency::MainActor @preconcurrency public var mode: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode
+  @_Concurrency::MainActor @preconcurrency public var panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape
+  @_Concurrency::MainActor @preconcurrency public var isLiquidGlass: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var panelStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var liquidGlassPanelStyle: SwiftUICore::AnyShapeStyle?
+  @_Concurrency::MainActor @preconcurrency public var separatorStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var showsLabels: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var showsControls: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var showsDiagnostics: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public init(provider: Provider, state: Provider.State, mode: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode = .both, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), liquidGlassPanelStyle: SwiftUICore::AnyShapeStyle? = nil, separatorStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.white.opacity(0.16)), showsLabels: Swift::Bool = true, showsControls: Swift::Bool = true, showsDiagnostics: Swift::Bool = true, simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity)
+  @_Concurrency::MainActor @preconcurrency public init<ExtraLiveActivityContent>(provider: Provider, state: Provider.State, mode: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode = .all, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), liquidGlassPanelStyle: SwiftUICore::AnyShapeStyle? = nil, separatorStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.white.opacity(0.16)), showsLabels: Swift::Bool = true, showsControls: Swift::Bool = true, showsDiagnostics: Swift::Bool = true, simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity, @SwiftUICore::ViewBuilder extraLiveActivity: @escaping () -> ExtraLiveActivityContent) where ExtraLiveActivityContent : SwiftUICore::View
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB21LiveActivitySimulatorV4bodyQrvp", 0) __<Provider>
+}
+extension DynamicLakeKit::DynamicLakeLiveActivitySimulator where Provider.State == DynamicLakeKit::DynamicLakeEmptyLiveActivityState {
+  @_Concurrency::MainActor @preconcurrency public init(provider: Provider, mode: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode = .both, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), liquidGlassPanelStyle: SwiftUICore::AnyShapeStyle? = nil, separatorStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.white.opacity(0.16)), showsLabels: Swift::Bool = true, showsControls: Swift::Bool = true, showsDiagnostics: Swift::Bool = true, simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity)
+  @_Concurrency::MainActor @preconcurrency public init<ExtraLiveActivityContent>(provider: Provider, mode: DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode = .all, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), liquidGlassPanelStyle: SwiftUICore::AnyShapeStyle? = nil, separatorStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.white.opacity(0.16)), showsLabels: Swift::Bool = true, showsControls: Swift::Bool = true, showsDiagnostics: Swift::Bool = true, simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity, @SwiftUICore::ViewBuilder extraLiveActivity: @escaping () -> ExtraLiveActivityContent) where ExtraLiveActivityContent : SwiftUICore::View
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeExtraLiveActivitySimulator<Content> : SwiftUICore::View where Content : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration
+  @_Concurrency::MainActor @preconcurrency public var panelStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects
+  @_Concurrency::MainActor @preconcurrency public init(configuration: DynamicLakeKit::DynamicLakeLiveActivityConfiguration, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity, @SwiftUICore::ViewBuilder content: @escaping () -> Content)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB26ExtraLiveActivitySimulatorV4bodyQrvp", 0) __<Content>
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeLiveActivityCompactSimulator<Provider> : SwiftUICore::View where Provider : DynamicLakeKit::DynamicLakeLiveActivityViewProvider {
+  @_Concurrency::MainActor @preconcurrency public let provider: Provider
+  @_Concurrency::MainActor @preconcurrency public let state: Provider.State
+  @_Concurrency::MainActor @preconcurrency public var panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape
+  @_Concurrency::MainActor @preconcurrency public var isLiquidGlass: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var panelStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects
+  @_Concurrency::MainActor @preconcurrency public init(provider: Provider, state: Provider.State, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB28LiveActivityCompactSimulatorV4bodyQrvp", 0) __<Provider>
+}
+extension DynamicLakeKit::DynamicLakeLiveActivityCompactSimulator where Provider.State == DynamicLakeKit::DynamicLakeEmptyLiveActivityState {
+  @_Concurrency::MainActor @preconcurrency public init(provider: Provider, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity)
+}
+@_Concurrency::MainActor @preconcurrency public struct DynamicLakeLiveActivitySneakPeekSimulator<Provider> : SwiftUICore::View where Provider : DynamicLakeKit::DynamicLakeLiveActivityViewProvider {
+  @_Concurrency::MainActor @preconcurrency public let provider: Provider
+  @_Concurrency::MainActor @preconcurrency public let state: Provider.State
+  @_Concurrency::MainActor @preconcurrency public var panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape
+  @_Concurrency::MainActor @preconcurrency public var isLiquidGlass: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var panelStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var separatorStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects
+  @_Concurrency::MainActor @preconcurrency public init(provider: Provider, state: Provider.State, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), separatorStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.white.opacity(0.16)), simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit0aB30LiveActivitySneakPeekSimulatorV4bodyQrvp", 0) __<Provider>
+}
+extension DynamicLakeKit::DynamicLakeLiveActivitySneakPeekSimulator where Provider.State == DynamicLakeKit::DynamicLakeEmptyLiveActivityState {
+  @_Concurrency::MainActor @preconcurrency public init(provider: Provider, panelShape: DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape = .notch, isLiquidGlass: Swift::Bool = false, panelStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.black.opacity(0.92)), separatorStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(Color.white.opacity(0.16)), simulation: DynamicLakeKit::DynamicLakeLiveActivitySimulatorEffects = .identity)
+}
+@_Concurrency::MainActor @preconcurrency public struct LiveActivitySlotLayout<LeftSlot, RightSlot> : SwiftUICore::View where LeftSlot : SwiftUICore::View, RightSlot : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let geometry: DynamicLakeKit::LiveActivityGeometry
+  @_Concurrency::MainActor @preconcurrency public var leftAlignment: SwiftUICore::Alignment
+  @_Concurrency::MainActor @preconcurrency public var rightAlignment: SwiftUICore::Alignment
+  @_Concurrency::MainActor @preconcurrency public init(geometry: DynamicLakeKit::LiveActivityGeometry, leftAlignment: SwiftUICore::Alignment = .leading, rightAlignment: SwiftUICore::Alignment = .trailing, @SwiftUICore::ViewBuilder left: () -> LeftSlot, @SwiftUICore::ViewBuilder right: () -> RightSlot)
+  @_Concurrency::MainActor @preconcurrency public init<State>(context: DynamicLakeKit::DynamicLakeLiveActivityContext<State>, leftAlignment: SwiftUICore::Alignment = .leading, rightAlignment: SwiftUICore::Alignment = .trailing, @SwiftUICore::ViewBuilder left: () -> LeftSlot, @SwiftUICore::ViewBuilder right: () -> RightSlot) where State : DynamicLakeKit::DynamicLakeLiveActivityState
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit22LiveActivitySlotLayoutV4bodyQrvp", 0) __<LeftSlot, RightSlot>
+}
+extension SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public func liveActivityScaled(by geometry: DynamicLakeKit::LiveActivityGeometry, anchor: SwiftUICore::UnitPoint = .center) -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityLeftSlotSymbol(in geometry: DynamicLakeKit::LiveActivityGeometry, visualWidth: CoreFoundation::CGFloat, extraLeadingPadding: CoreFoundation::CGFloat = 0, alignment: SwiftUICore::Alignment = .leading) -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityLeftSlotSymbol<State>(in context: DynamicLakeKit::DynamicLakeLiveActivityContext<State>, visualWidth: CoreFoundation::CGFloat? = nil, alignment: SwiftUICore::Alignment = .leading) -> some SwiftUICore::View where State : DynamicLakeKit::DynamicLakeLiveActivityState
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityLeftSlotContent(in geometry: DynamicLakeKit::LiveActivityGeometry, extraLeadingPadding: CoreFoundation::CGFloat = 0, alignment: SwiftUICore::Alignment = .leading) -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityRightSlotAccessory(in geometry: DynamicLakeKit::LiveActivityGeometry, visualWidth: CoreFoundation::CGFloat, extraTrailingPadding: CoreFoundation::CGFloat = 0, alignment: SwiftUICore::Alignment = .trailing) -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityRightSlotAccessory<State>(in context: DynamicLakeKit::DynamicLakeLiveActivityContext<State>, visualWidth: CoreFoundation::CGFloat, alignment: SwiftUICore::Alignment = .trailing) -> some SwiftUICore::View where State : DynamicLakeKit::DynamicLakeLiveActivityState
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityRightSlotContent(in geometry: DynamicLakeKit::LiveActivityGeometry, extraTrailingPadding: CoreFoundation::CGFloat = 0, alignment: SwiftUICore::Alignment = .trailing) -> some SwiftUICore::View
+  
+  @_Concurrency::MainActor @preconcurrency public func liveActivityRightSlotText(in geometry: DynamicLakeKit::LiveActivityGeometry, extraTrailingPadding: CoreFoundation::CGFloat = 0, alignment: SwiftUICore::Alignment = .trailing) -> some SwiftUICore::View
+  
+}
+@_Concurrency::MainActor @preconcurrency public struct LiveActivityCompactTextAccessory : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let text: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let geometry: DynamicLakeKit::LiveActivityGeometry
+  @_Concurrency::MainActor @preconcurrency public var fontSize: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var weight: SwiftUICore::Font.SwiftUICore::Weight
+  @_Concurrency::MainActor @preconcurrency public var foregroundStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var minimumScaleFactor: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var countsDown: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var numericTransition: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public init(text: Swift::String, geometry: DynamicLakeKit::LiveActivityGeometry, fontSize: CoreFoundation::CGFloat, weight: SwiftUICore::Font.SwiftUICore::Weight = .regular, foregroundStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(.white), minimumScaleFactor: CoreFoundation::CGFloat = 0.75, countsDown: Swift::Bool = false, numericTransition: Swift::Bool = true)
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit32LiveActivityCompactTextAccessoryV4bodyQrvp", 0) __
+}
+@_Concurrency::MainActor @preconcurrency public struct LiveActivityCompactTextSlot : SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public let text: Swift::String
+  @_Concurrency::MainActor @preconcurrency public let geometry: DynamicLakeKit::LiveActivityGeometry
+  @_Concurrency::MainActor @preconcurrency public var side: DynamicLakeKit::LiveActivitySlotSide
+  @_Concurrency::MainActor @preconcurrency public var fontSize: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var weight: SwiftUICore::Font.SwiftUICore::Weight
+  @_Concurrency::MainActor @preconcurrency public var foregroundStyle: SwiftUICore::AnyShapeStyle
+  @_Concurrency::MainActor @preconcurrency public var minimumScaleFactor: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var edgePadding: CoreFoundation::CGFloat?
+  @_Concurrency::MainActor @preconcurrency public var extraEdgePadding: CoreFoundation::CGFloat
+  @_Concurrency::MainActor @preconcurrency public var countsDown: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public var numericTransition: Swift::Bool
+  @_Concurrency::MainActor @preconcurrency public init(text: Swift::String, geometry: DynamicLakeKit::LiveActivityGeometry, side: DynamicLakeKit::LiveActivitySlotSide = .right, fontSize: CoreFoundation::CGFloat, weight: SwiftUICore::Font.SwiftUICore::Weight = .regular, foregroundStyle: SwiftUICore::AnyShapeStyle = AnyShapeStyle(.white), minimumScaleFactor: CoreFoundation::CGFloat = 0.82, edgePadding: CoreFoundation::CGFloat? = nil, extraEdgePadding: CoreFoundation::CGFloat = 0, countsDown: Swift::Bool = false, numericTransition: Swift::Bool = true)
+  @_Concurrency::MainActor @preconcurrency public init<State>(text: Swift::String, context: DynamicLakeKit::DynamicLakeLiveActivityContext<State>, side: DynamicLakeKit::LiveActivitySlotSide = .right, fontSize: CoreFoundation::CGFloat? = nil, weight: SwiftUICore::Font.SwiftUICore::Weight = .regular, foregroundStyle: SwiftUICore::AnyShapeStyle? = nil, minimumScaleFactor: CoreFoundation::CGFloat = 0.82, edgePadding: CoreFoundation::CGFloat? = nil, extraEdgePadding: CoreFoundation::CGFloat? = nil, countsDown: Swift::Bool = false, numericTransition: Swift::Bool = true) where State : DynamicLakeKit::DynamicLakeLiveActivityState
+  @_Concurrency::MainActor @preconcurrency public var body: some SwiftUICore::View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s14DynamicLakeKit27LiveActivityCompactTextSlotV4bodyQrvp", 0) __
+}
+public enum DynamicLakeKitInfo {
+  public static let sdkVersion: Swift::String
+}
+extension DynamicLakeKit::DynamicLakeActivityCommand : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeActivityStateReader : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeLiveActivity : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeExtraLiveActivity : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeSneakPeek : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeSettings : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginCommandType : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginOutboundType : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginActivityPriority : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginActivitySize : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginComponentType : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginTextStyle : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginTint : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginImageSource : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginButtonRole : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginButtonShape : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeJSONPluginStatus : Swift::RawRepresentable {}
+extension DynamicLakeKit::SneakPeekSlotSide : Swift::RawRepresentable {}
+extension DynamicLakeKit::SneakPeekEmptySlot : Swift::Sendable {}
+extension DynamicLakeKit::SneakPeekSlotLayout : Swift::Sendable {}
+extension DynamicLakeKit::LiveActivityPriority : Swift::RawRepresentable {}
+extension DynamicLakeKit::LiveActivitySlotSide : Swift::RawRepresentable {}
+extension DynamicLakeKit::LiveActivitySize : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeLiveActivitySimulatorMode : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeLiveActivitySimulatorShape : Swift::RawRepresentable {}
+extension DynamicLakeKit::DynamicLakeLiveActivitySimulator : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeExtraLiveActivitySimulator : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeLiveActivityCompactSimulator : Swift::Sendable {}
+extension DynamicLakeKit::DynamicLakeLiveActivitySneakPeekSimulator : Swift::Sendable {}
+extension DynamicLakeKit::LiveActivitySlotLayout : Swift::Sendable {}
+extension DynamicLakeKit::LiveActivityCompactTextAccessory : Swift::Sendable {}
+extension DynamicLakeKit::LiveActivityCompactTextSlot : Swift::Sendable {}
